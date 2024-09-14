@@ -1,0 +1,136 @@
+.Navbar {
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.8),
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0.1),
+    rgba(0, 0, 0, 0)
+  );
+  z-index: 1000;
+  width: 100%;
+  padding: 40px 50px;
+  padding-bottom: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logoContainer img {
+  width: 50px;
+  margin-right: 30px;
+}
+
+.logoContainer {
+  width: 55%;
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.links {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  white-space: nowrap;
+}
+
+.links a {
+  font-size: 18px;
+  text-decoration: none;
+  color: rgb(180, 180, 180);
+  font-weight: 300;
+  transition: all 0.3s;
+}
+
+.links a:hover {
+  color: rgb(255, 255, 255);
+  font-weight: 500;
+}
+
+.logoContainer input {
+  width: 100%;
+  background: none;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.407);
+  backdrop-filter: blur(20px);
+  outline: none;
+  border: none;
+  color: rgb(206, 206, 206);
+  font-size: 22px;
+  border-radius: 500px;
+  padding: 10px 20px;
+}
+
+.logoContainer input:focus {
+  color: white;
+}
+
+.links .dashboard {
+  position: relative;
+  width: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.74);
+  backdrop-filter: blur(10px);
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.pfp {
+  width: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.dropdown {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  width: 180px;
+  display: flex;
+  justify-content: right;
+  text-align: left;
+  flex-direction: column;
+  border-radius: 10px;
+  padding: 20px;
+  background: none;
+  color: rgb(123, 123, 123);
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.74);
+  backdrop-filter: blur(10px);
+  font-size: 22px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.dashboard:hover + .dropdown {
+  opacity: 1;
+  visibility: visible;
+}
+
+.dropdown:hover{
+    opacity: 1;
+    visibility: visible;
+}
+
+.dropdown p {
+  transition: all 0.3s;
+}
+
+.dropdown p:hover {
+  cursor: pointer;
+  color: white;
+}
