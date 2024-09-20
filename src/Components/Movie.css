@@ -1,7 +1,7 @@
 .mContainer {
   display: flex;
   flex-direction: column;
-  background-color: rgb(17, 17, 17);
+  background-color: #171c21;
   color: white;
 }
 
@@ -151,7 +151,7 @@
 }
 
 .moviesContainer .movieTags {
-  background-color: rgb(44, 44, 44);
+  background-color: #252e34;
   border-radius: 500px;
   padding: 3px 10px;
   width: 250px;
@@ -188,7 +188,7 @@
   justify-content: center;
   align-items: center;
   color: white;
-  background-color: rgb(39, 39, 39);
+  background-color: #252e34;
   cursor: default;
   pointer-events: none;
   font-weight: 100;

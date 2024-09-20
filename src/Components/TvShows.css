@@ -1,7 +1,7 @@
 .tvsContainer {
   display: flex;
   flex-direction: column;
-  background-color: rgb(17, 17, 17);
+  background-color: #171c21;
   color: white;
 }
 
@@ -16,6 +16,10 @@
   width: 100%;
   height: 100%;
   position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -25,6 +29,10 @@
 
 .tvModalOverlay {
   position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   width: 100%;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.546);
@@ -43,9 +51,73 @@
 
 .modalImgContainer {
   background: url("https://image.tmdb.org/t/p/w500/mKOBdgaEFguADkJhfFslY7TYxIh.jpg");
-  filter: blur(3px);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* filter: blur(3px); */
   height: 200px;
   margin-bottom: 20px;
+}
+
+.modalImgContainer .modalAddListButton {
+  width: 100%;
+  height: 200px;
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalAddListButton button {
+  width: 100%;
+  height: 200px;
+  background-color: rgba(0, 0, 0, 0.23);
+  color: rgba(255, 255, 255, 0.406);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0px;
+  box-shadow: none;
+  transition: 0.3s ease-in-out;
+}
+
+.modalAddListButton button svg {
+  font-size: 150px;
+}
+
+.modalAddListButton button:hover {
+  color: rgba(255, 255, 255, 0.82);
+  background-color: rgba(0, 0, 0, 0.335);
+}
+
+.mainTvModalHeader {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 25px;
+}
+
+.mainTvModalHeader h1 {
+  color: white;
+}
+
+.tvModalRating {
+  display: flex;
+  align-items: center;
+}
+
+.tvModalRating p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  color: rgb(193, 193, 193);
+  border-radius: 500px;
+  font-weight: 300;
+  font-size: 15px;
+  padding: 3px 10px;
+  background-color: rgb(49, 49, 49);
 }
 
 .trailerVideo iframe {
@@ -63,7 +135,6 @@
 .mainTvModal h1 {
   font-weight: 900;
   letter-spacing: 1px;
-  margin-bottom: 15px;
 }
 
 .tvStreamHeader p {
@@ -113,6 +184,10 @@
 .tvTrailerModal {
   padding: 0px 20px;
   margin-bottom: 15px;
+}
+
+.tvTrailerModal h1 {
+  color: white;
 }
 
 .tvModal::-webkit-scrollbar {
@@ -213,6 +288,11 @@
 }
 
 .bannerDisc h6 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
   line-height: 35px;
   letter-spacing: 2px;
   font-size: 17px;
@@ -289,7 +369,7 @@
 .tvContainer .tvTags {
   display: flex;
   justify-content: space-between;
-  background-color: rgb(44, 44, 44);
+  background-color: #252e34;
   border-radius: 500px;
   padding: 3px 10px;
   margin-bottom: 5px;
@@ -313,9 +393,9 @@
   font-size: 22px;
   font-weight: 700;
   text-align: left;
+  text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
   color: white;
 }
 
@@ -334,7 +414,7 @@
   justify-content: center;
   align-items: center;
   color: white;
-  background-color: rgb(39, 39, 39);
+  background-color: #252e34;
   cursor: default;
   pointer-events: none;
   font-weight: 100;

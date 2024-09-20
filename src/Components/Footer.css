@@ -1,0 +1,89 @@
+.footerContainer{
+    width: 100%;
+    padding: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 100;
+}
+
+.topFooter{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topLeft a{
+    margin-right: 30px;
+    text-decoration: none;
+    color: #a2adb3;
+    transition: 0.1s all;
+}
+
+.topLeft a:hover{
+    text-decoration: underline;
+    color: rgb(255, 255, 255);
+}
+
+.topRight svg{
+    margin-right: 5px;
+    color: #a2adb3;
+    font-size: 20px;
+    transition: 0.3s all;
+}
+
+.topRight svg:nth-child(3){
+    margin-right: 0px;
+}
+
+.topRight svg:hover{
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+.bottomFooter{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bottomLeft{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bottomLeft p{
+    color: #a2adb3;
+}
+
+.bottomLeft a{
+    color: #a2adb3;
+    text-decoration: none;
+    transition: 0.1s all;
+}
+
+.bottomLeft a:hover{
+    text-decoration: underline;
+    color: rgb(255, 255, 255);
+}
+
+hr{
+    width: 100%;
+    border: none;
+  height: 1px;
+  margin: 15px 0px;
+  background-color: #ffffff1e;
+}
+
+.bottomRight p{
+    color: #a2adb3;
+}
+
+.bottomRight p a{
+    color: #a2adb3;
+    text-decoration: underline;
+}

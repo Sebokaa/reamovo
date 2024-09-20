@@ -1,11 +1,21 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
+import Footer from "./Footer"
+import FadeIn from 'react-fade-in';
 import "./Movie.css";
 
 function Movie() {
   const [movie, setMovie] = useState([]);
   const [pages, setPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+  const [genres, setGenres] = useState([]);
+  const [rating, setRating] = useState("");
+  const [streamProviders, setStreamProviders] = useState([]);
+  const [providers, setProviders] = useState([]);
+  const [trailer, setTrailer] = useState("");
+  const [isDisplayed, setIsDisplayed] = useState(false);
+  const [cast, setCast] = useState([]);
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
   const fetchMovie = async (page) => {
     const response = await fetch(
@@ -16,6 +26,58 @@ function Movie() {
     setPages(responseJSON.total_pages);
   };
 
+  const fetchMovieGenre = async (seriesID) => {
+    const url = `https://api.themoviedb.org/3/movie/${seriesID}?language=en-US&api_key=713c33461007570ea56280951021d558`;
+    const response = await fetch(url);
+    const responseJSON = await response.json();
+    setGenres(responseJSON.genres);
+  };
+
+  const fetchMovieRating = async (seriesID) => {
+    const url = `https://api.themoviedb.org/3/movie/${seriesID}/release_dates?api_key=713c33461007570ea56280951021d558`;
+    const response = await fetch(url);
+    const responseJSON = await response.json();
+    responseJSON.results.forEach((result) => {
+      if (result.iso_3166_1 === "US") {
+        setRating(result.release_dates[0].certification);
+      }
+    });
+  };
+
+  const fetchMovieShowCast = async (seriesID) => {
+    const url = `https://api.themoviedb.org/3/movie/${seriesID}/credits?language=en-US&api_key=713c33461007570ea56280951021d558`;
+    const response = await fetch(url);
+    const responseJSON = await response.json();
+    setCast(responseJSON.cast.slice(0, 5));
+  };
+
+  const fetchMovieSeriesProvider = async (seriesID) => {
+    const url = `https://api.themoviedb.org/3/movie/${seriesID}/watch/providers?api_key=713c33461007570ea56280951021d558`;
+    const response = await fetch(url);
+    const responseJSON = await response.json();
+    if (Object.keys(responseJSON.results).length !== 0) {
+      if (responseJSON.results.US.buy) {
+        setProviders(responseJSON.results.US.buy);
+      }
+      if (responseJSON.results.US.flatrate) {
+        setStreamProviders(responseJSON.results.US.flatrate);
+      }
+    }
+  };
+
+  const fetchMovieTrailer = async (seriesID) => {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/movie/${seriesID}/videos?language=en-US&api_key=713c33461007570ea56280951021d558`
+    );
+    const responseJSON = await response.json();
+    responseJSON.results.forEach((trailer) => {
+      if (trailer.type === "Trailer") {
+        setTrailer(trailer.key);
+        return;
+      }
+    });
+  };
+
   const handlePageChangeUp = () => {
     if (currentPage < pages) setCurrentPage(currentPage + 1);
   };
@@ -24,11 +86,38 @@ function Movie() {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
   };
 
+  const openModal = (movie) => {
+    setSelectedMovie(movie);
+    setIsDisplayed(true);
+  };
+
+  const closeModal = () => {
+    setSelectedMovie(null);
+    setIsDisplayed(false);
+    setTrailer(null);
+    setRating(null)
+    setGenres([]);
+    setCast([]);
+    setProviders([]);
+    setStreamProviders([]);
+  };
+
+  useEffect(() => {
+    if (selectedMovie) {
+      fetchMovieRating(selectedMovie.id);
+      fetchMovieGenre(selectedMovie.id);
+      fetchMovieTrailer(selectedMovie.id);
+      fetchMovieShowCast(selectedMovie.id);
+      fetchMovieSeriesProvider(selectedMovie.id);
+    }
+  }, [selectedMovie]);
+
   useEffect(() => {
     fetchMovie(currentPage);
   }, [currentPage]);
 
   return (
+    <FadeIn transitionDuration={1000}>
     <div className="mContainer">
       <Navbar />
       <div className="bannerOverlay"></div>
@@ -103,24 +192,20 @@ function Movie() {
                 <span>·</span>
                 <div className="bannerAudience">
                   <svg
-                    style={{ fontSize: "31px", marginRight: "7px" }}
-                    color="#ffffff"
+                    style={{ fontSize: "47px", marginRight: "7px" }}
                     stroke="currentColor"
                     fill="currentColor"
                     stroke-width="0"
-                    viewBox="0 0 16 16"
+                    viewBox="0 0 640 512"
                     height="1em"
                     width="1em"
                     xmlns="http://www.w3.org/2000/svg"
                   >
-                    <path
-                      fill-rule="evenodd"
-                      d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 100-6 3 3 0 000 6zm-5.784 6A2.238 2.238 0 015 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 005 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"
-                      clip-rule="evenodd"
-                    ></path>
+                    <path d="M152.1 236.2c-3.5-12.1-7.8-33.2-7.8-33.2h-.5s-4.3 21.1-7.8 33.2l-11.1 37.5H163zM616 96H336v320h280c13.3 0 24-10.7 24-24V120c0-13.3-10.7-24-24-24zm-24 120c0 6.6-5.4 12-12 12h-11.4c-6.9 23.6-21.7 47.4-42.7 69.9 8.4 6.4 17.1 12.5 26.1 18 5.5 3.4 7.3 10.5 4.1 16.2l-7.9 13.9c-3.4 5.9-10.9 7.8-16.7 4.3-12.6-7.8-24.5-16.1-35.4-24.9-10.9 8.7-22.7 17.1-35.4 24.9-5.8 3.5-13.3 1.6-16.7-4.3l-7.9-13.9c-3.2-5.6-1.4-12.8 4.2-16.2 9.3-5.7 18-11.7 26.1-18-7.9-8.4-14.9-17-21-25.7-4-5.7-2.2-13.6 3.7-17.1l6.5-3.9 7.3-4.3c5.4-3.2 12.4-1.7 16 3.4 5 7 10.8 14 17.4 20.9 13.5-14.2 23.8-28.9 30-43.2H412c-6.6 0-12-5.4-12-12v-16c0-6.6 5.4-12 12-12h64v-16c0-6.6 5.4-12 12-12h16c6.6 0 12 5.4 12 12v16h64c6.6 0 12 5.4 12 12zM0 120v272c0 13.3 10.7 24 24 24h280V96H24c-13.3 0-24 10.7-24 24zm58.9 216.1L116.4 167c1.7-4.9 6.2-8.1 11.4-8.1h32.5c5.1 0 9.7 3.3 11.4 8.1l57.5 169.1c2.6 7.8-3.1 15.9-11.4 15.9h-22.9a12 12 0 0 1-11.5-8.6l-9.4-31.9h-60.2l-9.1 31.8c-1.5 5.1-6.2 8.7-11.5 8.7H70.3c-8.2 0-14-8.1-11.4-15.9z"></path>
                   </svg>
+
                   <p style={{ fontSize: "20px" }}>
-                    {movie.adult ? "18+" : "All Ages"}
+                    {movie.original_language.toUpperCase()}
                   </p>
                 </div>
               </div>
@@ -128,7 +213,12 @@ function Movie() {
                 <h6>{movie.overview}</h6>
               </div>
               <div className="bannerButtons">
-                <button href="">
+                <button
+                  onClick={() => {
+                    openModal(movie);
+                  }}
+                  href=""
+                >
                   <svg
                     stroke="currentColor"
                     fill="none"
@@ -195,7 +285,13 @@ function Movie() {
       </div>
       <div className="moviesContainer">
         {movie.map((movie) => (
-          <div className="movie" key={movie.id}>
+          <div  
+            className="movie"
+            onClick={() => {
+              openModal(movie);
+            }}
+            key={movie.id}
+          >
             <img
               src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
               alt=""
@@ -209,6 +305,148 @@ function Movie() {
           </div>
         ))}
       </div>
+
+      {isDisplayed && selectedMovie && (
+        <div className="moreInfoTvModal">
+          <div
+            onClick={() => {
+              closeModal();
+            }}
+            className="tvModalOverlay"
+          >
+          </div>
+          <div className="tvModal">
+            <div
+              className="modalImgContainer"
+              style={{
+                background: `url(https://image.tmdb.org/t/p/w500${selectedMovie.backdrop_path})`,
+                backgroundSize: "cover",
+              }}
+            >
+              <div className="modalAddListButton">
+                <button href="">
+                  <svg
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-width="0"
+                    viewBox="0 0 24 24"
+                    height="1em"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12ZM12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4Z"
+                      fill="currentColor"
+                    ></path>
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M13 7C13 6.44772 12.5523 6 12 6C11.4477 6 11 6.44772 11 7V11H7C6.44772 11 6 11.4477 6 12C6 12.5523 6.44772 13 7 13H11V17C11 17.5523 11.4477 18 12 18C12.5523 18 13 17.5523 13 17V13H17C17.5523 13 18 12.5523 18 12C18 11.4477 17.5523 11 17 11H13V7Z"
+                      fill="currentColor"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div className="mainTvModal">
+              <div className="mainTvModalHeader">
+                <h1>{selectedMovie.title}</h1>
+                <div className="tvModalRating">
+                  <svg
+                    style={{
+                      fontSize: "31px",
+                      color: "grey",
+                      marginRight: "7px",
+                    }}
+                    color="#ffffff"
+                    stroke="currentColor"
+                    fill="currentColor"
+                    stroke-width="0"
+                    viewBox="0 0 16 16"
+                    height="1em"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 100-6 3 3 0 000 6zm-5.784 6A2.238 2.238 0 015 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 005 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                  <p>{rating}</p>
+                </div>
+              </div>
+              <div className="tvGenre">
+                <div className="tvGenreHeader">
+                  <p>Genre: </p>
+                </div>
+                <div className="tvGenreList">
+                  {genres.map((genre) => (
+                    <span>{genre.name}</span>
+                  ))}
+                </div>
+              </div>
+              <div className="tvCast">
+                <div className="tvCastHeader">
+                  <p>Cast: </p>
+                </div>
+                <div className="tvCastList">
+                  {cast.map((castName) => (
+                    <span>{castName.name}</span>
+                  ))}
+                  <span>...</span>
+                </div>
+              </div>
+              <div className="tvStream">
+                <div className="tvStreamHeader">
+                  <p>Buy/Rent Providers:</p>
+                </div>
+                <div className="tvStreamList">
+                  {providers.map((provider) => (
+                    <span>
+                      <img
+                        src={`https://image.tmdb.org/t/p/w500${provider.logo_path}`}
+                        alt={provider.provider_name}
+                      />{" "}
+                      {provider.provider_name}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className="tvStream">
+                <div className="tvStreamHeader">
+                  <p>Streaming Providers:</p>
+                </div>
+                <div className="tvStreamList">
+                  {streamProviders.map((streaming) => (
+                    <span>
+                      <img
+                        src={`https://image.tmdb.org/t/p/w500${streaming.logo_path}`}
+                        alt={streaming.provider_name}
+                      />{" "}
+                      {streaming.provider_name}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="tvTrailerModal">
+              <h1 style={{ marginBottom: "10px" }}>Movie Trailer</h1>
+              <div className="trailerVideo">
+                <iframe
+                  src={`https://www.youtube.com/embed/${trailer}?rel=0`}
+                  title="Youtube Video "
+                  frameborder="0"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="mPages">
         <a
           onClick={() => handlePageChangeDown()}
@@ -246,7 +484,9 @@ function Movie() {
           </svg>
         </a>
       </div>
+      <Footer />
     </div>
+    </FadeIn>
   );
 }
 
