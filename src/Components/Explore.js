@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { addToWatchlist } from "../Util/watchlist";
 import Navbar from "./Navbar";
 import { Link } from "react-router-dom";
-import FadeIn from 'react-fade-in';
 import "./Explore.css";
 import Footer from "./Footer";
 

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { addToWatchlist } from "../Util/watchlist";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import FadeIn from "react-fade-in";
 import "./TvShows.css";
 
 function TvShows() {
@@ -17,7 +16,6 @@ function TvShows() {
   const [isDisplayed, setIsDisplayed] = useState(false);
   const [cast, setCast] = useState([]);
   const [selectedShow, setSelectedShow] = useState(null);
-  const [fadeInKey, setFadeInKey] = useState(0)
   const [movieAdded, setMovieAdded] = useState([]);
 
   const fetchTvShows = async (page) => {
@@ -81,14 +79,12 @@ function TvShows() {
 
   const handlePageChangeUp = () => {
     if (currentPage < pages) {
-      setFadeInKey((prev) => prev + 1)
       setCurrentPage(currentPage + 1);
     }
   };
 
   const handlePageChangeDown = () => {
     if (currentPage > 1) {
-      setFadeInKey((prev) => prev + 1)
       setCurrentPage(currentPage - 1);
     }
   };

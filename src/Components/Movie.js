@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer"
-import FadeIn from 'react-fade-in';
 import { addToWatchlist } from "../Util/watchlist";
 import "./Movie.css";
 

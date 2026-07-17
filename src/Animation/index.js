@@ -300,15 +300,6 @@ export const boxExit = (e) => {
     });
 };
 
-export const fadeIn = (el) => {
-  gsap.to(el, {
-    duration: 2,
-    opacity: 1,
-    y: -60,
-    ease: "power4.out",
-  });
-};
-
 export const fadeOut = (el) => {
   gsap.to(el, {
     duration: 1,
