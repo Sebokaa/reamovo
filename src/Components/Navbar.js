@@ -278,20 +278,20 @@ function Navbar() {
         </button>
         <div className={`links ${mobileMenuOpen ? 'mobileMenuOpen' : ''}`}>
           <Link to="/movies" onClick={closeMobileMenu}>
-            <a>Movies</a>
+            <p>Movies</p>
           </Link>
           <Link to="/tv-shows" onClick={closeMobileMenu}>
-            <a>TV-Shows</a>
+            <p>TV-Shows</p>
           </Link>
           <Link to="/reamovo-ai" onClick={closeMobileMenu}>
-            <a>Reamovo AI</a>
+            <p>Reamovo AI</p>
           </Link>
           {/* <Link to="/watchlist" onClick={closeMobileMenu}>
             <a href="">My Watch List</a>
           </Link> */}
-            <a  onClick={() => {auth.currentUser?handleLogOut() : handleGoogleLogin()}} className="dashboard">
+            <p  onClick={() => {auth.currentUser?handleLogOut() : handleGoogleLogin()}} className="dashboard">
               <img className="pfp" src={auth.currentUser?.photoURL ? auth.currentUser.photoURL : "https://static.vecteezy.com/system/resources/previews/020/765/399/original/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg"} alt="pfp" /> {auth.currentUser?"Log Out" : "Log In"}
-            </a>
+            </p>
         </div>
       </div>
       {isDisplayed && selectedShow && (
