@@ -133,7 +133,7 @@ function TvShows() {
   }, [currentPage]);
 
   return (
-    <FadeIn key={fadeInKey} transitionDuration={1000}>
+        <div className="fadeIn">
       <div className="tvsContainer">
         <Navbar />
         <div className="bannerOverlay"></div>
@@ -509,7 +509,7 @@ function TvShows() {
         </div>
         <Footer />
       </div>
-    </FadeIn>
+      </div>
   );
 }
 

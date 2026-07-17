@@ -391,6 +391,22 @@ button:hover {
     border-radius: 6px;
 }
 
+.fadeIn {
+    animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 @media (max-width: 1024px) {
     .exploreContainer {
         padding: 30px;

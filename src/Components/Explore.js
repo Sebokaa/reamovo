@@ -89,7 +89,7 @@ function Explore() {
         ? `https://image.tmdb.org/t/p/w500${selectedMovie.backdrop_path}`
         : `https://posters.movieposterdb.com/24_02/2024/12584954/l_twisters-movie-poster_a76b8a6c.jpg`;
     return (
-        <FadeIn transitionDuration={2000}>
+        <div className="fadeIn">
             <Navbar />
             <div className="exploreContainer">
                 <center>
@@ -335,7 +335,7 @@ function Explore() {
 
                 </div>
             </div>
-        </FadeIn>
+        </div>
     );
 }
 

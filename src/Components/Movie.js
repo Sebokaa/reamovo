@@ -151,7 +151,7 @@ function Movie() {
   }, [currentPage]);
 
   return (
-    <FadeIn transitionDuration={1000}>
+        <div className="fadeIn">
       <div className="mContainer">
         <Navbar />
         <div className="bannerOverlay"></div>
@@ -529,7 +529,7 @@ function Movie() {
         </div>
         <Footer />
       </div>
-    </FadeIn>
+    </div>
   );
 }
 
