@@ -97,3 +97,19 @@ h3 {
 .LoginCardRight input:focus {
     background-color: rgba(27, 27, 27, 0.33);
 }
+
+.LoginCardLeft img {
+    width: 450px;
+}
+
+@media (max-width: 980px) {
+    .LoginCard {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .LoginCardLeft img {
+        width: 300px;
+    }
+}

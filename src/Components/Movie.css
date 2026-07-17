@@ -1,7 +1,6 @@
 .mContainer {
   display: flex;
   flex-direction: column;
-  background-color: #171c21;
   color: white;
 }
 
@@ -50,7 +49,7 @@
 
 .movieBanner {
   width: 100%;
-  padding: 0px 50px;
+  padding: 0px clamp(15px, 3vw, 50px);
   z-index: 10;
 }
 
@@ -58,14 +57,14 @@
   margin-bottom: 20px;
   border-radius: 5px;
   opacity: 0.7;
-  width: 380px;
+  width: clamp(350px, 60vw, 400px);
   box-shadow: 0px 0px 3px black;
   background-color: rgba(0, 0, 0, 0.216);
   backdrop-filter: blur(20px);
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 40px;
+  font-size: clamp(24px, 5vw, 40px);
   font-weight: 500;
   gap: 15px;
   transition: all 0.3s;
@@ -82,7 +81,7 @@
 
 .bannerTitle h1 {
   font-weight: 900;
-  font-size: 50px;
+  font-size: clamp(28px, 5vw, 50px);
 }
 
 .bannerDisc {
@@ -94,7 +93,7 @@
 .bannerDisc h6 {
   line-height: 35px;
   letter-spacing: 2px;
-  font-size: 17px;
+  font-size: clamp(14px, 2.5vw, 17px);
   font-weight: 300;
 }
 
@@ -102,42 +101,48 @@
   width: 100%;
   display: flex;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
 .bannerButtons button {
-  width: 200px;
+  width: clamp(150px, 40vw, 200px);
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 500px;
-  font-size: 20px;
+  font-size: clamp(16px, 3vw, 20px);
   box-shadow: 0px 0px 3px black;
   background-color: rgba(0, 0, 0, 0.216);
   backdrop-filter: blur(20px);
 }
 
 .moviesTitleHeader {
-  padding: 0px 30px;
+  padding: 0px clamp(15px, 3vw, 30px);
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .moviesTitleHeader h1 {
-  font-size: 50px;
+  font-size: clamp(28px, 5vw, 50px);
 }
 
 .moviesTitleHeader p {
-  font-size: 20px;
+  font-size: clamp(14px, 2.5vw, 20px);
   font-weight: 100;
 }
+
 .moviesContainer {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   justify-content: center;
   align-items: center;
+  padding: 0 clamp(15px, 3vw, 30px);
+  gap: clamp(10px, 2vw, 30px);
 }
 
 .moviesContainer .movie {
@@ -145,20 +150,25 @@
 }
 
 .moviesContainer .movie img {
-    box-shadow: 0px 0px 5px rgb(57, 57, 57);
-  width: 250px;
-  height: 350px;
+  box-shadow: 0px 0px 10px rgb(0, 0, 0);
+  background-color: #1e1e1e;
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+  aspect-ratio: 5/7;
+  object-fit: cover;
 }
 
 .moviesContainer .movieTags {
-  background-color: #252e34;
+  background-color: #1f1f1f;
   border-radius: 500px;
   padding: 3px 10px;
-  width: 250px;
+  width: 100%;
+  max-width: 250px;
 }
 
 .moviesContainer .movieTags p {
-  font-size: 19px;
+  font-size: clamp(10px, 1vw, 15px);
 }
 
 .moviesContainer .movieTags p:nth-child(2) {
@@ -170,7 +180,9 @@
 }
 
 .moviesContainer .movieHeader {
-  width: 250px;
+  width: 100%;
+  max-width: 250px;
+  font-size: clamp(14px, 2.5vw, 18px);
 }
 
 .mPages {
@@ -188,7 +200,7 @@
   justify-content: center;
   align-items: center;
   color: white;
-  background-color: #252e34;
+  background-color: #1e1e1e;
   cursor: default;
   pointer-events: none;
   font-weight: 100;
@@ -196,7 +208,7 @@
   width: 30px;
   padding: 25px;
   height: 30px;
-  font-size: 22px;
+  font-size: clamp(18px, 3vw, 22px);
   border-radius: 50%;
   transition: all 0.3s;
 }
@@ -227,5 +239,178 @@
 
 .mPages svg {
   color: rgb(251, 251, 251);
-  font-size: 30px;
+  font-size: clamp(24px, 4vw, 30px);
+}
+
+/* Tablet Devices */
+@media (max-width: 1024px) {
+  .bannerOverlay {
+    height: 450px;
+  }
+
+  .mSideScroll {
+    height: 450px;
+  }
+
+  .mContainer .movieBannerContainer {
+    height: 450px;
+  }
+
+  .moviesContainer {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+}
+
+/* Tablet to Mobile */
+@media (max-width: 768px) {
+  .bannerOverlay {
+    height: 400px;
+  }
+
+  .mSideScroll {
+    height: 400px;
+    margin-bottom: 10px;
+  }
+
+  .mContainer .movieBannerContainer {
+    height: 400px;
+  }
+
+  .movieBanner {
+    padding: 0px 15px;
+  }
+
+  .bannerDisc {
+    width: 100%;
+  }
+
+  .moviesContainer {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+  }
+
+  .moviesContainer .movie img {
+    max-width: 150px;
+  }
+
+  .moviesContainer .movieTags {
+    max-width: 150px;
+  }
+
+  .moviesContainer .movieHeader {
+    max-width: 150px;
+  }
+}
+
+/* Mobile Devices */
+@media (max-width: 480px) {
+  .bannerOverlay {
+    height: 300px;
+  }
+
+  .mSideScroll {
+    height: 300px;
+    margin-bottom: 0px;
+  }
+
+  .mContainer .movieBannerContainer {
+    height: 300px;
+  }
+
+  .movieBanner {
+    padding: 0px 10px;
+  }
+
+  .bannerInfo {
+    font-size: clamp(20px, 4vw, 30px);
+  }
+
+  .bannerTitle h1 {
+    font-size: clamp(20px, 4vw, 36px);
+  }
+
+  .bannerDisc h6 {
+    font-size: clamp(12px, 2vw, 14px);
+    line-height: 24px;
+    -webkit-line-clamp: 2;
+  }
+
+  .bannerButtons {
+    gap: 10px;
+  }
+
+  .bannerButtons button {
+    width: clamp(120px, 35vw, 150px);
+    font-size: clamp(12px, 2.5vw, 16px);
+  }
+
+  .moviesTitleHeader {
+    padding: 0px 10px;
+  }
+
+  .moviesTitleHeader h1 {
+    font-size: clamp(20px, 4vw, 32px);
+  }
+
+  .moviesContainer {
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 8px;
+    padding: 0 10px;
+  }
+
+  .moviesContainer .movie img {
+    max-width: 130px;
+  }
+
+  .moviesContainer .movieTags {
+    max-width: 130px;
+    font-size: 11px;
+  }
+
+  .moviesContainer .movieHeader {
+    max-width: 130px;
+    font-size: clamp(11px, 2vw, 14px);
+  }
+
+  .mPages {
+    gap: 10px;
+  }
+}
+
+/* Extra Small Devices */
+@media (max-width: 360px) {
+  .mSideScroll {
+    height: 300px;
+  }
+
+  .mContainer .movieBannerContainer {
+    height: 300px;
+  }
+
+  .bannerOverlay {
+    height: 300px;
+  }
+
+  .movieBanner {
+    padding: 0px 8px;
+  }
+
+  .moviesContainer {
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 6px;
+    padding: 0 8px;
+  }
+
+  .moviesContainer .movie img {
+    max-width: 110px;
+  }
+
+  .moviesContainer .movieTags {
+    max-width: 110px;
+  }
+
+  .moviesContainer .movieHeader {
+    max-width: 110px;
+    font-size: 10px;
+  }
 }

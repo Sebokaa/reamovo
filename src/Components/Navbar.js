@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import LogoPic from "../Assets/logoPic.png";
 import Pfp from "../Assets/man.avif";
-import { signOut } from "firebase/auth";
-import { auth } from "../firebase";
+import { signInWithPopup, signOut } from "firebase/auth";
+import { auth, googleProvider } from "../firebase";
 import "./Navbar.css";
 
 function Navbar() {
@@ -17,6 +17,7 @@ function Navbar() {
   const [isDisplayed, setIsDisplayed] = useState(false);
   const [cast, setCast] = useState([]);
   const [selectedShow, setSelectedShow] = useState(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const fetchMovieAndTvShows = async (searchItem) => {
     const url = `https://api.themoviedb.org/3/search/multi?query=${searchItem}&api_key=713c33461007570ea56280951021d558`;
@@ -25,7 +26,6 @@ function Navbar() {
     const filteredResponseJSON = responseJSON.results?.filter(
       (item) => item.media_type !== "person"
     );
-    console.log(responseJSON);
     setSearchedDataList(filteredResponseJSON);
   };
 
@@ -67,7 +67,6 @@ function Navbar() {
     }
     const response = await fetch(url);
     const responseJSON = await response.json();
-    console.log(responseJSON)
     setCast(responseJSON.cast.slice(0, 5));
   };
 
@@ -96,6 +95,15 @@ function Navbar() {
     });
   };
 
+  const handleGoogleLogin = async () => {
+      try {
+        await signInWithPopup(auth, googleProvider);
+        console.log("Logged In!");
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
   const handleLogOut = async () => {
     try {
       await signOut(auth);
@@ -121,7 +129,13 @@ function Navbar() {
     setStreamProviders([]);
   };
 
-  console.log(selectedShow);
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+  };
+
+  const handleHamburgerClick = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
 
   useEffect(() => {
     if (selectedShow) {
@@ -141,9 +155,7 @@ function Navbar() {
     <div className="Navbar">
       <div className="navContainer">
         <div className="logoContainer">
-          <Link to="/">
             <img src={LogoPic} alt="Logo " />
-          </Link>
           <input
             placeholder="Search Movie or TV-Show..."
             type="text"
@@ -260,21 +272,27 @@ function Navbar() {
             ))}
           </div>
         </div>
-        <div className="links">
-          <Link to="/movies">
+        <button className="hamburgerMenu" onClick={handleHamburgerClick}>
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+        <div className={`links ${mobileMenuOpen ? 'mobileMenuOpen' : ''}`}>
+          <Link to="/movies" onClick={closeMobileMenu}>
             <a href="">Movies</a>
           </Link>
-          <Link to="/tv-shows">
+          <Link to="/tv-shows" onClick={closeMobileMenu}>
             <a href="">TV-Shows</a>
           </Link>
-          <a href="">Explore</a>
-          <a href="">My Watch List</a>
-          <a class="dashboard" href="">
-            <img class="pfp" src={auth.currentUser?.photoURL ? auth.currentUser.photoURL : "https://static.vecteezy.com/system/resources/previews/020/765/399/original/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg"} alt="pfp" /> Dashboard
-          </a>
-          <div onClick={() => {handleLogOut()}} className="dropdown">
-            <p>Log Out</p>
-          </div>
+          <Link to="/reamovo-ai" onClick={closeMobileMenu}>
+            <a href="">Reamovo AI</a>
+          </Link>
+          <Link to="/watchlist" onClick={closeMobileMenu}>
+            <a href="">My Watch List</a>
+          </Link>
+            <a  onClick={() => {auth.currentUser?handleLogOut() : handleGoogleLogin()}} className="dashboard" href="#">
+              <img className="pfp" src={auth.currentUser?.photoURL ? auth.currentUser.photoURL : "https://static.vecteezy.com/system/resources/previews/020/765/399/original/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg"} alt="pfp" /> {auth.currentUser?"Log Out" : "Log In"}
+            </a>
         </div>
       </div>
       {isDisplayed && selectedShow && (

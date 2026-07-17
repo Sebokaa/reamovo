@@ -19,7 +19,7 @@ function Login() {
       <div className="LoginCard">
         <div className="LoginCardLeft">
           <h1 style={{ fontSize: "50px", fontWeight: "100" }}>Welcome To</h1>
-          <img style={{ width: "450px" }} src={Logo} alt="Reamovo Logo" />
+          <img src={Logo} alt="Reamovo Logo" />
         </div>
         <div className="LoginCardRight">
           <h1

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { addToWatchlist } from "../Util/watchlist";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import FadeIn from "react-fade-in";
@@ -17,13 +18,13 @@ function TvShows() {
   const [cast, setCast] = useState([]);
   const [selectedShow, setSelectedShow] = useState(null);
   const [fadeInKey, setFadeInKey] = useState(0)
+  const [movieAdded, setMovieAdded] = useState([]);
 
   const fetchTvShows = async (page) => {
     const response = await fetch(
       `https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=${page}&api_key=713c33461007570ea56280951021d558`
     );
     const responseJSON = await response.json();
-    console.log(responseJSON.results);
     setTvs(responseJSON.results);
     setPages(responseJSON.total_pages);
   };
@@ -91,6 +92,15 @@ function TvShows() {
       setCurrentPage(currentPage - 1);
     }
   };
+
+   const handleWatchlist = async (movie) => {
+      try {
+        setMovieAdded([...movieAdded, movie.id]);
+        await addToWatchlist(movie);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
   const openModal = (tv) => {
     setSelectedShow(tv);
@@ -255,31 +265,36 @@ function TvShows() {
                     </svg>{" "}
                     More Info
                   </button>
-                  <button href="">
-                    <svg
-                      style={{ fontSize: "24px" }}
-                      stroke="currentColor"
-                      fill="none"
-                      stroke-width="0"
-                      viewBox="0 0 24 24"
-                      height="1em"
-                      width="1em"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                        d="M2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12ZM12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4Z"
-                        fill="currentColor"
-                      ></path>
-                      <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                        d="M13 7C13 6.44772 12.5523 6 12 6C11.4477 6 11 6.44772 11 7V11H7C6.44772 11 6 11.4477 6 12C6 12.5523 6.44772 13 7 13H11V17C11 17.5523 11.4477 18 12 18C12.5523 18 13 17.5523 13 17V13H17C17.5523 13 18 12.5523 18 12C18 11.4477 17.5523 11 17 11H13V7Z"
-                        fill="currentColor"
-                      ></path>
-                    </svg>{" "}
-                    Watch List
+                  <button onClick={() => handleWatchlist(tv)}>
+                    {movieAdded.includes(tv.id) ? (
+                      <svg stroke="currentColor" fill="currentColor" stroke-width="0" version="1" viewBox="0 0 48 48" enable-background="new 0 0 48 48" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><polygon fill="#43A047" points="40.6,12.1 17,35.7 7.4,26.1 4.6,29 17,41.3 43.4,14.9"></polygon></svg>
+                    ) : (
+                      <svg
+                        style={{ fontSize: "24px" }}
+                        stroke="currentColor"
+                        fill="none"
+                        stroke-width="0"
+                        viewBox="0 0 24 24"
+                        height="1em"
+                        width="1em"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12ZM12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4Z"
+                          fill="currentColor"
+                        ></path>
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M13 7C13 6.44772 12.5523 6 12 6C11.4477 6 11 6.44772 11 7V11H7C6.44772 11 6 11.4477 6 12C6 12.5523 6.44772 13 7 13H11V17C11 17.5523 11.4477 18 12 18C12.5523 18 13 17.5523 13 17V13H17C17.5523 13 18 12.5523 18 12C18 11.4477 17.5523 11 17 11H13V7Z"
+                          fill="currentColor"
+                        ></path>
+                      </svg>
+                    )
+                    }
+                    {" "} Watch List
                   </button>
                 </div>
               </div>
@@ -329,29 +344,33 @@ function TvShows() {
                 }}
               >
                 <div className="modalAddListButton">
-                  <button href="">
-                    <svg
-                      stroke="currentColor"
-                      fill="none"
-                      stroke-width="0"
-                      viewBox="0 0 24 24"
-                      height="1em"
-                      width="1em"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                        d="M2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12ZM12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4Z"
-                        fill="currentColor"
-                      ></path>
-                      <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                        d="M13 7C13 6.44772 12.5523 6 12 6C11.4477 6 11 6.44772 11 7V11H7C6.44772 11 6 11.4477 6 12C6 12.5523 6.44772 13 7 13H11V17C11 17.5523 11.4477 18 12 18C12.5523 18 13 17.5523 13 17V13H17C17.5523 13 18 12.5523 18 12C18 11.4477 17.5523 11 17 11H13V7Z"
-                        fill="currentColor"
-                      ></path>
-                    </svg>
+                  <button onClick={() => handleWatchlist(selectedShow)}>
+                    {movieAdded.includes(selectedShow.id) ? (
+                      <svg stroke="currentColor" fill="currentColor" stroke-width="0" version="1" viewBox="0 0 48 48" enable-background="new 0 0 48 48" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><polygon fill="#43A047" points="40.6,12.1 17,35.7 7.4,26.1 4.6,29 17,41.3 43.4,14.9"></polygon></svg>
+                    ) : (
+                      <svg
+                        stroke="currentColor"
+                        fill="none"
+                        stroke-width="0"
+                        viewBox="0 0 24 24"
+                        height="1em"
+                        width="1em"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12ZM12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4Z"
+                          fill="currentColor"
+                        ></path>
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M13 7C13 6.44772 12.5523 6 12 6C11.4477 6 11 6.44772 11 7V11H7C6.44772 11 6 11.4477 6 12C6 12.5523 6.44772 13 7 13H11V17C11 17.5523 11.4477 18 12 18C12.5523 18 13 17.5523 13 17V13H17C17.5523 13 18 12.5523 18 12C18 11.4477 17.5523 11 17 11H13V7Z"
+                          fill="currentColor"
+                        ></path>
+                      </svg>
+                    )}
                   </button>
                 </div>
               </div>

@@ -42,14 +42,14 @@
 .movieTitle h1 {
   color: white;
   font-weight: 900;
-  font-size: 50px;
+  font-size: clamp(28px, 5vw, 50px);
 }
 
 .movieDescription h6 {
   font-weight: 100;
   letter-spacing: 2px;
   line-height: 32px;
-  font-size: 18px;
+  font-size: clamp(14px, 2.5vw, 18px);
   color: white;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -70,7 +70,7 @@
 
 button {
   border: none;
-  width: 250px;
+  width: clamp(150px, 40vw, 250px);
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.74);
   color: rgb(153, 153, 153);
   gap: 10px;
@@ -79,7 +79,7 @@ button {
   padding: 10px;
   border-radius: 10px;
   font-weight: 700;
-  font-size: 25px;
+  font-size: clamp(16px, 3vw, 25px);
   transition: all 0.3s;
 }
 
@@ -138,20 +138,20 @@ button:hover {
   border-radius: 1000px;
 }
 .movieHeader {
-  width: 160px;
+  width: clamp(100px, 25vw, 160px);
   white-space: nowrap; /* Prevent line breaks */
   overflow: hidden; /* Hide overflow text */
   text-overflow: ellipsis; /* Add ellipsis (...) */
   text-align: left;
   color: white;
-  font-size: 22px;
+  font-size: clamp(14px, 2.5vw, 22px);
   font-weight: 700;
 }
 
 .movie img {
   cursor: pointer;
-  width: 160px;
-  height: 220px;
+  width: clamp(100px, 25vw, 160px);
+  height: clamp(140px, 33vw, 220px);
   border-radius: 10px;
   margin-bottom: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.82);
@@ -184,4 +184,147 @@ button:hover {
 .showMore:hover {
     transform: translateY(0);
 
+}
+
+/* Tablet Devices */
+@media (max-width: 1024px) {
+  .descriptionsContainer {
+    padding: 0px 30px;
+  }
+
+  .left {
+    width: 70%;
+  }
+
+  .options {
+    width: 30%;
+  }
+
+  .movieList {
+    padding: 0px 30px;
+  }
+}
+
+/* Tablet to Mobile */
+@media (max-width: 768px) {
+  .Home {
+    height: auto;
+    min-height: 100vh;
+    padding-bottom: 30px;
+  }
+
+  .descriptionsContainer {
+    flex-direction: column;
+    padding: 80px 20px 30px;
+    gap: 30px;
+  }
+
+  .left {
+    width: 100%;
+  }
+
+  .options {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .movieList {
+    padding: 0px 20px;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .movie {
+    width: 100%;
+    max-width: 200px;
+  }
+
+  .movieTags {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+/* Mobile Devices */
+@media (max-width: 480px) {
+  .Home {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .overlay {
+    height: 100%;
+  }
+
+  .descriptionsContainer {
+    padding: 70px 15px 20px;
+    gap: 20px;
+  }
+
+  .left {
+    width: 100%;
+  }
+
+  .movieTitle h1 {
+    margin-bottom: 10px;
+  }
+
+  .options {
+    width: 100%;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  button {
+    width: 100%;
+    padding: 8px;
+  }
+
+  .movieContainers {
+    width: 100%;
+  }
+
+  .movieList {
+    padding: 0px 15px;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .movie {
+    width: 100%;
+    max-width: 160px;
+  }
+
+  .movieTags {
+    width: 100%;
+    max-width: 160px;
+    font-size: 12px;
+  }
+
+  .movieHeader {
+    font-size: clamp(12px, 2vw, 18px);
+  }
+
+  .arrow1 {
+    display: none;
+  }
+}
+
+/* Extra Small Devices */
+@media (max-width: 360px) {
+  .descriptionsContainer {
+    padding: 60px 10px 15px;
+  }
+
+  .movieList {
+    padding: 0px 10px;
+  }
+
+  button {
+    width: 100%;
+    font-size: clamp(14px, 2.5vw, 20px);
+  }
 }

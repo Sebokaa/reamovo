@@ -1,0 +1,515 @@
+.exploreContainer {
+    width: 100%;
+    padding: 50px;
+    overflow: hidden;
+}
+
+.exploreOverlay {
+    width: 100%;
+    min-height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    backdrop-filter: blur(10px);
+}
+
+.exploreTitle {
+    color: white;
+    font-size: 70px;
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+
+.changingWord {
+    display: inline-block;
+    animation: fadeWord .5s ease;
+
+    background: #9A6AD3;
+    background: linear-gradient(to right, #9A6AD3 0%, #3096D2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+}
+
+@keyframes fadeWord {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.exploreSubTitle {
+    color: white;
+    font-size: 24px;
+    font-weight: 300;
+    margin-bottom: 40px;
+}
+
+.exploreHome {
+    background: url("https://posters.movieposterdb.com/24_02/2024/12584954/l_twisters-movie-poster_a76b8a6c.jpg") no-repeat center center fixed;
+    background-size: cover;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+    padding-bottom: 10px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 20px rgb(0, 0, 0);
+    transition: background-image 0.3s ease-in-out;
+    /* Adjust the duration and timing function as needed */
+    overflow: hidden;
+}
+
+.exploreDescriptionsContainer {
+    width: 100%;
+    z-index: 10;
+    padding: 0px 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.exploreLeft {
+    width: 65%;
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    align-content: center;
+}
+
+.exploreRight {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.exploreMovieTitle h1 {
+    color: white;
+    font-weight: 900;
+    font-size: 50px;
+}
+
+.exploreMovieDescription h6 {
+    font-weight: 100;
+    letter-spacing: 2px;
+    line-height: 32px;
+    font-size: 18px;
+    color: white;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.exploreReasonBackground {
+    background-color: rgba(0, 0, 0, 0.618);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.641);
+    padding: 3px 7px;
+    border-radius: 10px;
+    width: fit-content;
+    margin-bottom: 10px;
+}
+
+.exploreReasonBackground h6 {
+    font-weight: 500;
+}
+
+.exploreOptions {
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 10;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    width: 200px;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.74);
+    color: rgb(153, 153, 153);
+    gap: 10px;
+    background: rgba(0, 0, 0, 0.486);
+    backdrop-filter: blur(4px);
+    padding: 10px;
+    border-radius: 1000px;
+    font-weight: 700;
+    font-size: 20px;
+    transition: all 0.3s;
+}
+
+button:hover {
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    backdrop-filter: blur(12px);
+}
+
+.exploreMovieContainers {
+    z-index: 10;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.exploreMovieList {
+    width: 100%;
+    padding: 0px 50px;
+    gap: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.exploreMovie {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0.7;
+    transition: all 0.3s;
+}
+
+.exploreMovie:hover {
+    opacity: 1;
+    transform: translateY(-10px);
+}
+
+.exploreMovieTags {
+    color: white;
+    font-size: 16px;
+    font-weight: 300;
+    width: 160px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.exploreMovTag {
+    background-color: rgba(0, 0, 0, 0.378);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.641);
+    padding: 3px 7px;
+    border-radius: 1000px;
+}
+
+.exploreMovieHeader {
+    width: 160px;
+    white-space: nowrap;
+    /* Prevent line breaks */
+    overflow: hidden;
+    /* Hide overflow text */
+    text-overflow: ellipsis;
+    /* Add ellipsis (...) */
+    text-align: left;
+    color: white;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.exploreDescriptionsContainer img {
+    cursor: pointer;
+    width: 190px;
+    height: 280px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.82);
+}
+
+.exploreMovie img {
+    cursor: pointer;
+    width: 160px;
+    height: 220px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.82);
+}
+
+.exploreArrow1 {
+    color: rgb(255, 255, 255);
+    font-size: 50px;
+    animation: slide1 1s ease-in-out infinite;
+    margin-left: 9px;
+}
+
+@keyframes slide1 {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(10px, 0);
+    }
+}
+
+.exploreChatInput {
+    width: 90%;
+    max-width: 900px;
+
+    margin: 80px auto 0px auto;
+
+    display: flex;
+    align-items: center;
+
+    background: rgb(21, 21, 21);
+
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.82);
+
+    padding: 10px 15px;
+
+    z-index: 10;
+}
+
+.exploreChatInput input {
+    flex: 1;
+
+    background: transparent;
+    border: none;
+    outline: none;
+
+    color: white;
+    font-size: 17px;
+
+    padding: 12px;
+}
+
+.exploreChatInput input::placeholder {
+    color: rgba(255, 255, 255, .6);
+}
+
+.exploreSendButton {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 10px;
+
+    background: rgba(31, 31, 31, 0.792);
+    box-shadow: none;
+
+    color: white;
+    font-size: 22px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: .25s;
+}
+
+.exploreSendButton:hover {
+    transform: scale(1.08);
+    background: rgb(31, 31, 31);
+}
+
+/* ---------- Skeleton ---------- */
+
+@keyframes skeletonLoading {
+    0% {
+        background-position: -200px 0;
+    }
+
+    100% {
+        background-position: calc(200px + 100%) 0;
+    }
+}
+
+.skeleton {
+    background: linear-gradient(90deg,
+            #2b2b2b 25%,
+            #3a3a3a 50%,
+            #2b2b2b 75%);
+    background-size: 400px 100%;
+    animation: skeletonLoading 1.3s infinite linear;
+}
+
+/* Main title */
+.skeletonTitle {
+    width: 450px;
+    height: 60px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+/* Overview */
+.skeletonText {
+    width: 90%;
+    height: 18px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+.skeletonText.short {
+    width: 65%;
+}
+
+/* Button */
+.skeletonButton {
+    width: 250px;
+    height: 58px;
+    border-radius: 12px;
+}
+
+/* Posters */
+
+.skeletonPoster {
+    width: 160px;
+    height: 220px;
+    border-radius: 10px;
+}
+
+.skeletonTag {
+    width: 160px;
+    height: 18px;
+    margin-top: 8px;
+    border-radius: 6px;
+}
+
+.skeletonMovieTitle {
+    width: 120px;
+    height: 22px;
+    margin-top: 8px;
+    border-radius: 6px;
+}
+
+@media (max-width: 1024px) {
+    .exploreContainer {
+        padding: 30px;
+    }
+
+    .exploreTitle {
+        font-size: 52px;
+    }
+
+    .exploreSubTitle {
+        font-size: 20px;
+    }
+
+    .exploreDescriptionsContainer {
+        padding: 0 30px;
+        gap: 30px;
+    }
+
+    .exploreMovieList {
+        gap: 15px;
+        padding: 0 20px;
+    }
+
+    .exploreMovie img {
+        width: 130px;
+        height: 190px;
+    }
+
+    .exploreMovieHeader,
+    .exploreMovieTags {
+        width: 130px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .exploreContainer {
+        padding: 15px;
+    }
+
+    .exploreTitle {
+        font-size: 40px;
+        text-align: center;
+    }
+
+    .exploreSubTitle {
+        font-size: 18px;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .exploreDescriptionsContainer {
+        flex-direction: column-reverse;
+        align-items: center;
+        text-align: center;
+        padding: 50px 0px;
+    }
+
+    .exploreLeft {
+        width: 100%;
+    }
+
+    .exploreRight {
+        margin-bottom: 25px;
+    }
+
+    .exploreDescriptionsContainer img {
+        width: 180px;
+        height: auto;
+    }
+
+    .exploreMovieTitle h1 {
+        font-size: 34px;
+    }
+
+    .exploreMovieDescription h6 {
+        font-size: 16px;
+        line-height: 28px;
+    }
+
+    .exploreMovieList {
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding: 20px;
+        gap: 18px;
+    }
+
+    .exploreMovie {
+        flex-shrink: 0;
+    }
+
+    .exploreChatInput {
+        width: 100%;
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .exploreTitle {
+        font-size: 30px;
+    }
+
+    .exploreMovieTitle h1 {
+        font-size: 28px;
+    }
+
+    .exploreDescriptionsContainer img {
+        width: 150px;
+    }
+
+    .exploreMovie img {
+        width: 120px;
+        height: 170px;
+    }
+
+    .exploreMovieHeader,
+    .exploreMovieTags {
+        width: 120px;
+        font-size: 14px;
+    }
+}
