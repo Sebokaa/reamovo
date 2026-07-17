@@ -20,7 +20,7 @@ function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const fetchMovieAndTvShows = async (searchItem) => {
-    const url = `https://api.themoviedb.org/3/search/multi?query=${searchItem}&api_key=713c33461007570ea56280951021d558`;
+    const url = `https://api.themoviedb.org/3/search/multi?query=${searchItem}&api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
     const response = await fetch(url);
     const responseJSON = await response.json();
     const filteredResponseJSON = responseJSON.results?.filter(
@@ -30,7 +30,7 @@ function Navbar() {
   };
 
   const fetchTvGenre = async (mediaType, seriesID) => {
-    const url = `https://api.themoviedb.org/3/${mediaType}/${seriesID}?language=en-US&api_key=713c33461007570ea56280951021d558`;
+    const url = `https://api.themoviedb.org/3/${mediaType}/${seriesID}?language=en-US&api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
     const response = await fetch(url);
     const responseJSON = await response.json();
     setGenres(responseJSON.genres);
@@ -38,7 +38,7 @@ function Navbar() {
 
   const fetchTvRating = async (mediaType, seriesID) => {
     if(mediaType === "movie") {
-      const url = `https://api.themoviedb.org/3/movie/${seriesID}/release_dates?api_key=713c33461007570ea56280951021d558`;
+      const url = `https://api.themoviedb.org/3/movie/${seriesID}/release_dates?api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
     const response = await fetch(url);
     const responseJSON = await response.json();
     responseJSON.results.forEach((result) => {
@@ -47,7 +47,7 @@ function Navbar() {
       }
     });
     } else {
-      const url = `https://api.themoviedb.org/3/${mediaType}/${seriesID}/content_ratings?api_key=713c33461007570ea56280951021d558`;
+      const url = `https://api.themoviedb.org/3/${mediaType}/${seriesID}/content_ratings?api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
     const response = await fetch(url);
     const responseJSON = await response.json();
     responseJSON.results.forEach((result) => {
@@ -61,9 +61,9 @@ function Navbar() {
   const fetchTvShowCast = async (mediaType, seriesID) => {
     let url = "";
     if(mediaType === "movie") {
-      url = `https://api.themoviedb.org/3/movie/${seriesID}/credits?language=en-US&api_key=713c33461007570ea56280951021d558`;
+      url = `https://api.themoviedb.org/3/movie/${seriesID}/credits?language=en-US&api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
     } else {
-      url = `https://api.themoviedb.org/3/tv/${seriesID}/aggregate_credits?language=en-US&api_key=713c33461007570ea56280951021d558`;
+      url = `https://api.themoviedb.org/3/tv/${seriesID}/aggregate_credits?language=en-US&api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
     }
     const response = await fetch(url);
     const responseJSON = await response.json();
@@ -71,7 +71,7 @@ function Navbar() {
   };
 
   const fetchTvSeriesProvider = async (mediaType, seriesID) => {
-    const url = `https://api.themoviedb.org/3/${mediaType}/${seriesID}/watch/providers?api_key=713c33461007570ea56280951021d558`;
+    const url = `https://api.themoviedb.org/3/${mediaType}/${seriesID}/watch/providers?api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
     const response = await fetch(url);
     const responseJSON = await response.json();
     if (responseJSON.results?.US?.buy) {
@@ -84,7 +84,7 @@ function Navbar() {
 
   const fetchTrailer = async (mediaType, seriesID) => {
     const response = await fetch(
-      `https://api.themoviedb.org/3/${mediaType}/${seriesID}/videos?language=en-US&api_key=713c33461007570ea56280951021d558`
+      `https://api.themoviedb.org/3/${mediaType}/${seriesID}/videos?language=en-US&api_key=${process.env.REACT_APP_TMDB_API_KEY}`
     );
     const responseJSON = await response.json();
     responseJSON.results.forEach((trailer) => {

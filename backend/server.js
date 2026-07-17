@@ -21,7 +21,7 @@ app.get("/", (req, res) => {
 async function getMovieDetails(title, year) {
 
     const response = await fetch(
-        `https://api.themoviedb.org/3/search/movie?api_key=713c33461007570ea56280951021d558&query=${encodeURIComponent(title)}`
+        `https://api.themoviedb.org/3/search/movie?api_key=${process.env.TMDB_API_KEY}&query=${encodeURIComponent(title)}`
     );
 
     const data = await response.json();

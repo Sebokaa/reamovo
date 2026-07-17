@@ -6,6 +6,7 @@ import "./Explore.css";
 import Footer from "./Footer";
 
 function Explore() {
+    
     const [isInitial, setIsInitial] = useState(true);
     const [movieList, setMovieList] = useState([]);
     const [prompt, setPrompt] = useState("");
@@ -33,11 +34,12 @@ function Explore() {
     }, []);
 
     const getMovieRequest = async () => {
-        const url =
-            "https://api.themoviedb.org/3/discover/movie?api_key=713c33461007570ea56280951021d558";
+        const url = `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
 
         const response = await fetch(url);
         const reponseJson = await response.json();
+
+        console.log(reponseJson.results);
 
         setMovieList(reponseJson.results);
         setSelectedMovie(reponseJson.results[2]);
