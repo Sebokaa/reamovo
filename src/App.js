@@ -50,7 +50,7 @@ function App() {
 
   return (
     <div className="App">
-      {/* {showPreloader && <Preloader />} */}
+      {showPreloader && <Preloader />}
       {!isAuthenticated && <Login />}
       <Router>
         <Routes>

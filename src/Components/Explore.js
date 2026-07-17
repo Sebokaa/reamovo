@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { addToWatchlist } from "../Util/watchlist";
 import Navbar from "./Navbar";
-import { Link } from "react-router-dom";
 import "./Explore.css";
 import Footer from "./Footer";
 
@@ -336,6 +335,7 @@ function Explore() {
 
                 </div>
             </div>
+            <Footer />
         </div>
     );
 }
