@@ -30,7 +30,7 @@ function Explore() {
         }, 1500);
 
         return () => clearInterval(interval);
-    }, []);
+    }, [word.length]);
 
     const getMovieRequest = async () => {
         const url = `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}`;

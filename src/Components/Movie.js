@@ -493,7 +493,6 @@ function Movie() {
           <a
             onClick={() => handlePageChangeDown()}
             disabled={currentPage === 1}
-            href="#"
           >
             <svg
               stroke="currentColor"
@@ -511,7 +510,6 @@ function Movie() {
           <a
             onClick={() => handlePageChangeUp()}
             disabled={currentPage === pages}
-            href="#"
           >
             <svg
               stroke="currentColor"

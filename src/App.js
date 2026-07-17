@@ -54,7 +54,8 @@ function App() {
       {!isAuthenticated && <Login />}
       <Router>
         <Routes>
-          <Route path="/" element={<Movie />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/movies" element={<Movie />} />
           <Route path="/tv-shows" element={<TvShows />} />
           <Route path="/reamovo-ai" element={<Explore />} />

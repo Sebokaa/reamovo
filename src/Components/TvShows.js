@@ -470,7 +470,6 @@ function TvShows() {
           <a
             onClick={() => handlePageChangeDown()}
             disabled={currentPage === 1}
-            href="#"
           >
             <svg
               stroke="currentColor"
@@ -488,7 +487,6 @@ function TvShows() {
           <a
             onClick={() => handlePageChangeUp()}
             disabled={currentPage === pages}
-            href="#"
           >
             <svg
               stroke="currentColor"

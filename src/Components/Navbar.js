@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import LogoPic from "../Assets/logoPic.png";
-import Pfp from "../Assets/man.avif";
 import { signInWithPopup, signOut } from "firebase/auth";
 import { auth, googleProvider } from "../firebase";
 import "./Navbar.css";
@@ -279,18 +278,18 @@ function Navbar() {
         </button>
         <div className={`links ${mobileMenuOpen ? 'mobileMenuOpen' : ''}`}>
           <Link to="/movies" onClick={closeMobileMenu}>
-            <a href="">Movies</a>
+            <a>Movies</a>
           </Link>
           <Link to="/tv-shows" onClick={closeMobileMenu}>
-            <a href="">TV-Shows</a>
+            <a>TV-Shows</a>
           </Link>
           <Link to="/reamovo-ai" onClick={closeMobileMenu}>
-            <a href="">Reamovo AI</a>
+            <a>Reamovo AI</a>
           </Link>
           {/* <Link to="/watchlist" onClick={closeMobileMenu}>
             <a href="">My Watch List</a>
           </Link> */}
-            <a  onClick={() => {auth.currentUser?handleLogOut() : handleGoogleLogin()}} className="dashboard" href="#">
+            <a  onClick={() => {auth.currentUser?handleLogOut() : handleGoogleLogin()}} className="dashboard">
               <img className="pfp" src={auth.currentUser?.photoURL ? auth.currentUser.photoURL : "https://static.vecteezy.com/system/resources/previews/020/765/399/original/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg"} alt="pfp" /> {auth.currentUser?"Log Out" : "Log In"}
             </a>
         </div>

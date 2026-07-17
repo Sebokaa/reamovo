@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import { Link } from "react-router-dom";
 import "./Home.css";
-import Footer from "./Footer";
 
 function Home() {
   const [movieList, setMovieList] = useState([]);
