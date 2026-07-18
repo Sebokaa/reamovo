@@ -2,7 +2,7 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import Preloader from "./Components/Preloader";
-import Home from "./Components/Home";
+// import Home from "./Components/Home";
 import Movie from "./Components/Movie";
 import TvShows from "./Components/TvShows";
 import Login from "./Components/Login";
@@ -54,8 +54,8 @@ function App() {
       {!isAuthenticated && <Login />}
       <Router>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Movie />} />
+          {/* <Route path="/home" element={<Home />} /> */}
           <Route path="/movies" element={<Movie />} />
           <Route path="/tv-shows" element={<TvShows />} />
           <Route path="/reamovo-ai" element={<Explore />} />
