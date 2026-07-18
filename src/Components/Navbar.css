@@ -153,6 +153,7 @@
 
 .links .dashboard {
   position: relative;
+  color: white;
   width: clamp(120px, 25vw, 180px);
   display: flex;
   justify-content: center;
