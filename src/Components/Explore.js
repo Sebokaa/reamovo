@@ -58,7 +58,7 @@ function Explore() {
         setLoading(true);
         setPrompt("");
 
-        const response = await fetch("http://localhost:5050/recommendations", {
+        const response = await fetch("https://reamovo-backend.onrender.com/recommendations", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
