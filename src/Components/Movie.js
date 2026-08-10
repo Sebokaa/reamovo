@@ -129,7 +129,7 @@ function Movie() {
   const handleWatchlist = async (movie) => {
     try {
       setMovieAdded([...movieAdded, movie.id]);
-      await addToWatchlist(movie);
+      await addToWatchlist("movie" + movie.id);
     } catch (error) {
       console.error(error);
     }

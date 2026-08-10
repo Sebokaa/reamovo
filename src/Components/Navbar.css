@@ -150,6 +150,7 @@
 }
 
 .links .dashboard {
+  cursor: pointer;
   position: relative;
   color: white;
   width: clamp(120px, 25vw, 180px);
@@ -264,11 +265,13 @@
   }
 
   .links.mobileMenuOpen .dashboard {
+    background-color: #ffffff0f;
     display: flex;
     justify-content: center;
     align-items: center;
     width: auto;
     font-size: 14px;
+    margin-top: 10px;
   }
 
   .pfp {

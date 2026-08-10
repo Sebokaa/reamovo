@@ -11,6 +11,7 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 import Explore from "./Components/Explore";
+import Watchlist from "./Components/Watchlist";
 
 function App() {
   // const [showPreloader, setShowPreloader] = useState(true);
@@ -59,6 +60,7 @@ function App() {
           <Route path="/movies" element={<Movie />} />
           <Route path="/tv-shows" element={<TvShows />} />
           <Route path="/reamovo-ai" element={<Explore />} />
+          <Route path="/watchlist" element={<Watchlist />} />
         </Routes>
       </Router>
     </div>

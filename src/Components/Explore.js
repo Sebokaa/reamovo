@@ -79,7 +79,7 @@ function Explore() {
     const handleWatchlist = async (movie) => {
         try {
             setMovieAdded([...movieAdded, movie.id]);
-            await addToWatchlist(movie);
+            await addToWatchlist(movie.id);
         } catch (error) {
             console.error(error);
         }
@@ -168,9 +168,9 @@ function Explore() {
                                             alt=""
                                         />
                                         <div className="exploreMovieTags">
-                                            <p>{movie.release_date.slice(0, 4)}</p>
+                                            <p>{movie.release_date?.slice(0, 4) || "N/A"}</p>
                                             <p class="exploreMovTag">MOV...</p>
-                                            <p>{`${movie.vote_average.toFixed(1)}/10`}</p>
+                                            <p>{`${movie.vote_average?.toFixed(1) || "N/A"}/10`}</p>
                                         </div>
                                         <div className="exploreMovieHeader">{movie.title}</div>
                                     </div>

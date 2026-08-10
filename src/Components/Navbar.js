@@ -286,9 +286,9 @@ function Navbar() {
           <Link to="/reamovo-ai" onClick={closeMobileMenu}>
             <p>Reamovo AI</p>
           </Link>
-          {/* <Link to="/watchlist" onClick={closeMobileMenu}>
-            <a href="">My Watch List</a>
-          </Link> */}
+          <Link to="/watchlist" onClick={closeMobileMenu}>
+            <p>My Watch List</p>
+          </Link>
             <p  onClick={() => {auth.currentUser?handleLogOut() : handleGoogleLogin()}} className="dashboard">
               <img className="pfp" src={auth.currentUser?.photoURL ? auth.currentUser.photoURL : "https://static.vecteezy.com/system/resources/previews/020/765/399/original/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg"} alt="pfp" /> {auth.currentUser?"Log Out" : "Log In"}
             </p>

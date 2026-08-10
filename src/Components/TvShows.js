@@ -89,14 +89,14 @@ function TvShows() {
     }
   };
 
-   const handleWatchlist = async (movie) => {
-      try {
-        setMovieAdded([...movieAdded, movie.id]);
-        await addToWatchlist(movie);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  const handleWatchlist = async (movie) => {
+    try {
+      setMovieAdded([...movieAdded, movie.id]);
+      await addToWatchlist("show"+movie.id);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const openModal = (tv) => {
     setSelectedShow(tv);
@@ -129,7 +129,7 @@ function TvShows() {
   }, [currentPage]);
 
   return (
-        <div className="fadeIn">
+    <div className="fadeIn">
       <div className="tvsContainer">
         <Navbar />
         <div className="bannerOverlay"></div>
@@ -503,7 +503,7 @@ function TvShows() {
         </div>
         <Footer />
       </div>
-      </div>
+    </div>
   );
 }
 
